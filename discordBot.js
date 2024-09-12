@@ -43,7 +43,7 @@ async function sendDeals(channelId, deals, siteName, isInitial = false) {
       await channel.send({ embeds: [embed] });
     }
 
-    console.log(`${isInitial ? 'Latest deal' : 'New deals'} sent to ${siteName} discord channel.\n`);
+    console.log(`${isInitial ? 'Latest deal' : 'New deals'} sent to ${siteName} discord channel.`);
   } catch (error) {
     console.error(`Error sending ${isInitial ? 'initial message' : 'new deals'} for ${siteName}:`, error);
   }
