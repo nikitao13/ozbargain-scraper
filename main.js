@@ -4,6 +4,13 @@ import { getLatestDeals, findNewDeals } from "./scraper.js";
 
 let lastDeals = [];
 
+function logObject(obj) {
+  const formattedEntries = Object.entries(obj)
+    .map(([key, value]) => `${key}: ${JSON.stringify(value)}`)
+    .join('\n');
+  console.log(`\n${formattedEntries}\n`);
+}
+
 async function main() {
   await initializeBot();
 
@@ -11,7 +18,7 @@ async function main() {
   if (initialDeals.length > 0) {
     await sendInitialMessage(config.ozbargain.discordChannelId, initialDeals[0], "OzBargain");
     lastDeals = initialDeals;
-    console.log(initialDeals[0]);
+    logObject(initialDeals[0]);
   }
 
   setInterval(async () => {
@@ -19,11 +26,11 @@ async function main() {
     const newDeals = findNewDeals(currentDeals, lastDeals);
 
     if (newDeals.length > 0) {
-      console.log(`Found ${newDeals.length} new deals`);
+      console.log(`\nFound ${newDeals.length} new deals`);
       await sendNewDeals(config.ozbargain.discordChannelId, newDeals, "OzBargain");
       lastDeals = currentDeals;
     } else {
-      console.log("No new deals found");
+      console.log("Scanned for new deals but none were found.");
     }
   }, config.ozbargain.scanInterval);
 }

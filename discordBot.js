@@ -6,7 +6,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 async function initializeBot() {
   await client.login(process.env.DISCORD_TOKEN);
-  console.log("Discord bot is ready! ✅");
+  console.log("Discord bot is ready!");
 }
 
 function createDealEmbed(deal, siteName, isInitial = false) {
@@ -43,7 +43,7 @@ async function sendDeals(channelId, deals, siteName, isInitial = false) {
       await channel.send({ embeds: [embed] });
     }
 
-    console.log(`${isInitial ? 'Latest deal' : 'New deals'} sent to Discord channel for ${siteName} ✅`);
+    console.log(`${isInitial ? 'Latest deal' : 'New deals'} sent to ${siteName} discord channel.\n`);
   } catch (error) {
     console.error(`Error sending ${isInitial ? 'initial message' : 'new deals'} for ${siteName}:`, error);
   }
